@@ -37,3 +37,55 @@ location_color(:) = {'\color{red}'};
 location_text = strcat(location_color, location);
 % strcat('abc', 'def') -> = 'abcdef'
 set(gca, 'XTickLabel', location_text)
+
+% sort data
+[wind_speed_sorted, idx] = sort(wind_speed, 'ascend');
+location_sorted = location(idx);
+
+% bar graph for sorted data
+x = 1 : Nsample;
+y = wind_speed_sorted;
+bar(x, y, 0.8) % 0.8의 막대의 두께(0~1)
+% bar(wind_speed)는 x의 값이 없으나 wind_speed의 갯수 77개를 알아서 만들어 넣어줌
+ylabel('Wind Speed [km/h]')
+
+%get gca='get current axes' 궁금하면 command창에 'gca'입력해보기
+set(gca, 'XTick', [0:Nsample-1])
+% [1:1:Nsample] [시작값:증가값:끝값]
+set(gca, 'XTickLabelRotation', 80)
+set(gca, 'Fontsize', 8)
+
+%get gcf='get current figure'
+set(gcf, 'Color', 'w')
+
+location_color = cell(Nsample, 1)
+location_color(:) = {'\color{red}'};
+location_text = strcat(location_color, location_sorted);
+% strcat('abc', 'def') -> = 'abcdef'
+set(gca, 'XTickLabel', location_text)
+
+% different color bar graph
+Y = diag(y); 
+bar(x,  Y, 'stacked') 
+N = length(x)
+color = jet(N);
+for i = 1:N
+    ha(i).FaceColor = color(i,:);
+end
+% bar(wind_speed)는 x의 값이 없으나 wind_speed의 갯수 77개를 알아서 만들어 넣어줌
+ylabel('Wind Speed [km/h]')
+
+%get gca='get current axes' 궁금하면 command창에 'gca'입력해보기
+set(gca, 'XTick', [0:Nsample-1])
+% [1:1:Nsample] [시작값:증가값:끝값]
+set(gca, 'XTickLabelRotation', 80)
+set(gca, 'Fontsize', 8)
+
+%get gcf='get current figure'
+set(gcf, 'Color', 'w')
+
+location_color = cell(Nsample, 1)
+location_color(:) = {'\color{red}'};
+location_text = strcat(location_color, location_sorted);
+% strcat('abc', 'def') -> = 'abcdef'
+set(gca, 'XTickLabel', location_text)
